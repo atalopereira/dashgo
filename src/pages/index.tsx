@@ -1,5 +1,5 @@
 import { Button, Flex, FormControl, Stack } from "@chakra-ui/react";
-import { Input } from '../components/forms/Input'
+import { Input } from '../components/Form/Input'
 
 export default function Home() {
   return (
