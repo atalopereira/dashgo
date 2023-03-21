@@ -1,12 +1,18 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
 
 import { Header } from "@/src/components/Header";
 import { Sidebar } from "@/src/components/Sidebar";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Pagination } from "@/src/components/Pagination";
+import Link from "next/link";
 
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  })
+
   return (
     <Box>
       <Header />
@@ -18,31 +24,33 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">Usuários</Heading>
 
-            <Button
-              as="a"
-              size="sm"
-              fontSize="sm"
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-            >
-              Criar novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="sm"
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              >
+                Criar novo
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
-                <Th px="6" color="gray.300" width="8">
+                <Th px={["4", "4", "6"]} color="gray.300" width="8">
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>Usuários</Th>
-                <Th>Data de cadastro</Th>
+                { isWideVersion && <Th>Data de cadastro</Th> }
                 <Th width="8" />
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                <Td px="6">
+                <Td px={["4", "4", "6"]}>
                   <Checkbox colorScheme="pink" />
                 </Td>
                 <Td>
@@ -51,16 +59,17 @@ export default function UserList() {
                     <Text fontSize="sm" color="gray.300">atalopereira@hotmail.com</Text>
                   </Box>
                 </Td>
-                <Td>19 de Março, 2023</Td>
+                { isWideVersion && <Td>19 de Março, 2023</Td> }
                 <Td>
                   <Button
                     as="a"
                     size="sm"
                     fontSize="sm"
                     colorScheme="purple"
+                    iconSpacing={isWideVersion ? '1.5' : '-0.5'}
                     leftIcon={<Icon as={RiPencilLine} fontSize="20" />}
                   >
-                    Editar
+                    { isWideVersion ? 'Editar' : ''}
                   </Button>
                 </Td>
               </Tr>
